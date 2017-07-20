@@ -1,0 +1,38 @@
+priority -50
+
+# agnostic trailing semicolon
+global !p
+from javascript_snippets import (
+	semi
+)
+
+def styled(snip):
+	if len(t[1]) > 0:
+		snip.rv = '\n\nconst Wrap = styled.div`\n\tcolor: black;\n`' + semi(snip) + '\n'
+	else:
+		snip.rv = ""
+endglobal
+
+snippet react "functional REACT component"
+import React from 'react'`!p snip.rv = semi(snip)`
+import PropTypes from 'prop-types'`!p snip.rv = semi(snip)`
+${1:import styled from 'styled-components'`!p snip.rv = semi(snip)`}`!p styled(snip)`
+const ${2} = props => {
+	return (
+			${3:<${4:Wrap}>${5:'{props.object.attr}'}</$4}>}
+			)`!p snip.rv = semi(snip)`
+}`!p snip.rv = semi(snip)`
+
+$2.propTypes = {
+object: PropTypes.object,
+}`!p snip.rv = semi(snip)`
+
+export default $2`!p snip.rv = semi(snip)`${0}
+endsnippet
+
+snippet styled "react styled component" b
+const ${1:Wrap} = styled.${2:div}\`
+${3}
+\``!p snip.rv = semi(snip)`
+${0}
+endsnippet
